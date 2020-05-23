@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetBool("isAlive", true);
         animator.SetBool("isGrounded", true);
+        animator.SetBool("isMoving", false);
     }
 
     // Update is called once per frame
@@ -28,8 +29,13 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)){ //Se pulsa el espacio
             Jump();
         }
-        animator.SetBool("isGrounded", IsTouchingTheGround()); //asignamos true o false para cambiar la animación
+
+        animator.SetBool("isMoving", Moving()); //animator de moverse a idle
+        animator.SetBool("isGrounded", IsTouchingTheGround()); //animator de salto
+
+
         
+
     }
 
     private void FixedUpdate()
@@ -77,8 +83,14 @@ public class PlayerController : MonoBehaviour
             else
                 return false;
     }
-    
-    
+
+    bool Moving() {
+        if (rigidbody.velocity.x == 0)
+            return false;
+
+        else
+            return true;
+    }
     
 }
 
