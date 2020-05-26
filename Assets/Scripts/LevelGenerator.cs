@@ -21,10 +21,10 @@ public class LevelGenerator : MonoBehaviour
 
     public void AddLevelBlock()
     {
-        int randomIndex = Random.Range(0, allTheLevelBlocks.Count);
+        int randomIndex = Random.Range(0, allTheLevelBlocks.Count);//random entre x,y puede coger x pero no y
 
-        LevelBlock currentBlock = (LevelBlock)Instantiate(allTheLevelBlocks[randomIndex]);
-        currentBlock.transform.SetParent(this.transform, false);
+        LevelBlock currentBlock = (LevelBlock)Instantiate(allTheLevelBlocks[randomIndex]); //Hacemos un ccasting a la instancia para que sea (LevelBlock) por defecto las instancias son GameObject
+        currentBlock.transform.SetParent(this.transform, false);//hacemos que sea hijo en la jerarquia del LevelGenerator
 
         Vector3 spawnPosition = Vector3.zero;
 
@@ -37,29 +37,39 @@ public class LevelGenerator : MonoBehaviour
             spawnPosition = currentBlocks[currentBlocks.Count - 1].exitPoint.position;
         }
 
-        currentBlock.transform.position = spawnPosition;
+
+        Vector3 correction = new Vector3(spawnPosition.x - currentBlock.startPoint.position.x, spawnPosition.y - currentBlock.startPoint.position.y, 0);
+
+        currentBlock.transform.position = correction;
 
         currentBlocks.Add(currentBlock);
-
     }
 
     private void Start()
     {
-        AddLevelBlock();
+        GenerateInitialBlocks();
     }
 
     public void RemoveOldestLevelBlock()
     {
-
+        LevelBlock oldestBlock = currentBlocks[0];
+        currentBlocks.Remove(oldestBlock);
+        Destroy(oldestBlock.gameObject);
     }
 
     public void RemoveAllTheBlocks()
     {
-
+        while (currentBlocks.Count > 0)
+        {
+            RemoveOldestLevelBlock();
+        }
     }
 
     public void GenerateInitialBlocks()
     {
-
+        for (int i = 0; i < 2; i++)
+        {
+            AddLevelBlock();
+        }
     }
 }
