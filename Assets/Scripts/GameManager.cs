@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     public GameState currentGameState = GameState.menu;//Variable para saber en qué estado del juego nos encontramos, la inicialzamos en menú principal
 
+    public Canvas menuCanvas, gameCanvas, gameOverCanvas;
 
     private void Awake()
     {
@@ -82,13 +83,21 @@ public class GameManager : MonoBehaviour
     {
         if(newGameState == GameState.menu)
         {
-            //Preparar la escena de Unity para el menú
+            menuCanvas.enabled = true;
+            gameOverCanvas.enabled = false;
+            gameCanvas.enabled = false;
         }
         else if (newGameState == GameState.gameOver){
-            //Preparar la escena de Unity para el game over
+            menuCanvas.enabled = false;
+            gameOverCanvas.enabled = true;
+            gameCanvas.enabled = false;
+
         }
-        else if(newGameState == GameState.inGame) { 
-        
+        else if(newGameState == GameState.inGame) {
+            menuCanvas.enabled = false;
+            gameOverCanvas.enabled = false;
+            gameCanvas.enabled = true;
+
         }
 
         this.currentGameState= newGameState;
