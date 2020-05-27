@@ -44,14 +44,20 @@ public class GameManager : MonoBehaviour
     //Método encargado de iniciar el juego
     public void StartGame() {
         SetGameState(GameState.inGame);
-        PlayerController.sharedInstance.StartGame();
 
         GameObject camera =GameObject.FindGameObjectWithTag("MainCamera");
         CameraFollow cameraFollow = camera.GetComponent<CameraFollow>();
         cameraFollow.ResetCameraPosition();
+        Debug.Log("Hacemos StartGame en el GameManager");
 
-        LevelGenerator.sharedInstance.RemoveAllTheBlocks();
-        LevelGenerator.sharedInstance.GenerateInitialBlocks();
+        if (PlayerController.sharedInstance.transform.position.x > 0)
+        {
+            Debug.Log("Se está destruyendo y generando");
+            LevelGenerator.sharedInstance.RemoveAllTheBlocks();
+            LevelGenerator.sharedInstance.GenerateInitialBlocks();
+        }
+
+        PlayerController.sharedInstance.StartGame();
 
     }
 
@@ -84,9 +90,6 @@ public class GameManager : MonoBehaviour
         else if(newGameState == GameState.inGame) { 
         
         }
-
-
-
 
         this.currentGameState= newGameState;
     }
