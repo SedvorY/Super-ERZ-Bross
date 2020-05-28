@@ -38,6 +38,10 @@ public class GameManager : MonoBehaviour
         {
             StartGame();
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            ExitGame();
+        }
         
     }
 
@@ -70,7 +74,15 @@ public class GameManager : MonoBehaviour
     
     }
 
-
+    //Método para salir de la aplicación
+    public void ExitGame()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+            Application.Quit();
+        #endif
+    }
 
 
     //Método para volver al menú inicial cuando el usuario lo quiera hacer
