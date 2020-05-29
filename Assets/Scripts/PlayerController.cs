@@ -114,6 +114,21 @@ public class PlayerController : MonoBehaviour
     {
         GameManager.sharedInstance.GameOver();
         this.animator.SetBool("isAlive", false);
+
+        //En PlayerPrefs se guardan datos entre partidas, se asigna una clave y un valor inicial
+        float currentMaxScore = PlayerPrefs.GetFloat("maxscore", 0);
+
+        if (currentMaxScore < this.GetDistance())
+        {
+            PlayerPrefs.SetFloat("maxscore", this.GetDistance());
+        }
+    }
+
+    public float GetDistance()
+    {
+        float travelledDistance = Vector2.Distance(new Vector2(startPosition.x, 0), new Vector2(this.transform.position.x, 0));
+        return travelledDistance;
+
     }
 
 }
