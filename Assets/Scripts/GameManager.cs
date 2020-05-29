@@ -17,6 +17,8 @@ public class GameManager : MonoBehaviour
 
     public Canvas menuCanvas, gameCanvas, gameOverCanvas;
 
+    public int collectedObjects = 0;
+
     private void Awake()
     {
         sharedInstance = this;
@@ -63,6 +65,8 @@ public class GameManager : MonoBehaviour
         }
 
         PlayerController.sharedInstance.StartGame();
+
+        this.collectedObjects = 0;
 
     }
 
@@ -115,6 +119,11 @@ public class GameManager : MonoBehaviour
         this.currentGameState= newGameState;
     }
 
+    public void CollectObject(int ObjectValue)
+    {
+        this.collectedObjects += ObjectValue;
 
+        Debug.Log("LLevamos recogidos " + this.collectedObjects);
+    }
 
 }
