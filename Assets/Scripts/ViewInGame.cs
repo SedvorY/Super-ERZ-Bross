@@ -8,7 +8,7 @@ public class ViewInGame : MonoBehaviour
 
     public Text collectableLabel;
     public Text scoreLabel;
-    public Text maxScoreLabel;
+    public Text maxscoreLabel;
 
     void Update()
     {
@@ -24,8 +24,8 @@ public class ViewInGame : MonoBehaviour
             float travelledDistance = PlayerController.sharedInstance.GetDistance();
             this.scoreLabel.text = "Score\n"+travelledDistance.ToString("f1");
 
-            float maxScore = PlayerPrefs.GetFloat("maxscore", 0);
-            this.maxScoreLabel.text = "MaxScore\n" + maxScore.ToString("f1");
+            float maxscore = PlayerPrefs.GetFloat("maxscore", 0);
+            this.maxscoreLabel.text = "Max Score\n" + maxscore.ToString("f1");
         }
     }
 }
