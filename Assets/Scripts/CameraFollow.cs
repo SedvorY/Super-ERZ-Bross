@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform target;
 
-    public Vector3 offset = new Vector3(-0.3f, 3f, -10);
+    public Vector3 offset = new Vector3(2f, 3f, -10);
 
     public float dampTime = 0.3f;
 
@@ -29,7 +29,7 @@ public class CameraFollow : MonoBehaviour
 
         Vector3 destination = point + delta;
 
-        destination = new Vector3(destination.x, offset.y, offset.z);
+        destination = new Vector3(target.position.x+offset.x, target.position.y+offset.y, offset.z);
 
         this.transform.position = Vector3.SmoothDamp(this.transform.position, destination, ref velocity, dampTime);
 
@@ -43,7 +43,7 @@ public class CameraFollow : MonoBehaviour
 
         Vector3 destination = point + delta;
 
-        destination = new Vector3(destination.x, offset.y, offset.z);
+        destination = new Vector3(target.position.x + offset.x, target.position.y + offset.y, offset.z);
 
         this.transform.position = destination;
     }

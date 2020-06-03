@@ -13,6 +13,9 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     private Rigidbody2D rigidbody;
 
+    bool flipPlayer = true;
+    SpriteRenderer playerRenderer;
+
     private Vector3 startPosition;
 
     private int healthPoints, manaPoints;
@@ -35,6 +38,7 @@ public class PlayerController : MonoBehaviour
         sharedInstance = this;
         rigidbody = GetComponent<Rigidbody2D>();
         startPosition = this.transform.position;//Tomamos el valor de inicio de nuestro pj en esta variable
+        playerRenderer = GetComponent<SpriteRenderer>();
     }
 
     // Start is called before the first frame update
@@ -82,6 +86,16 @@ public class PlayerController : MonoBehaviour
                 Jump(true);
             }
         }
+
+        if(rigidbody.velocity.x>0&&!flipPlayer)
+        {
+            Flip();
+        }else if (rigidbody.velocity.x < 0 && flipPlayer)
+        {
+            Flip();
+        }
+        
+
         animator.SetBool("isMoving", Moving()); //animator de moverse a idle
         animator.SetBool("isGrounded", IsTouchingTheGround()); //animator de salto
 
@@ -201,6 +215,12 @@ public class PlayerController : MonoBehaviour
     public int GetMana()
     {
         return this.manaPoints;
+    }
+
+    public void Flip()
+    {
+        flipPlayer = !flipPlayer;
+        playerRenderer.flipX = !playerRenderer.flipX;
     }
 
 }
