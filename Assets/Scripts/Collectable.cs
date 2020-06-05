@@ -13,6 +13,9 @@ public class Collectable : MonoBehaviour
     public CollectableType type = CollectableType.money;
     bool isCollected = false;
 
+    public AudioClip collectSound;
+
+
     public int value = 0;
 
     //Método para activar la moneda y su collider
@@ -42,6 +45,8 @@ public class Collectable : MonoBehaviour
         switch (this.type)
         {
             case CollectableType.money:
+                GetComponent<AudioSource>().PlayOneShot(this.collectSound);
+
                 GameManager.sharedInstance.CollectObject(value);
                 break;
 
