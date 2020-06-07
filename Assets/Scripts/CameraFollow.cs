@@ -6,7 +6,7 @@ public class CameraFollow : MonoBehaviour
 {
     public Transform target;
 
-    public Vector3 offset = new Vector3(2f, 3f, -10);
+    public Vector3 offset = new Vector3(2f, 3f, 10);
 
     public float dampTime = 0.3f;
 

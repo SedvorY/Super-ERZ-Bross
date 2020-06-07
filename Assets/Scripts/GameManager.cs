@@ -123,7 +123,7 @@ public class GameManager : MonoBehaviour
     {
         this.collectedObjects += ObjectValue;
 
-        Debug.Log("LLevamos recogidos " + this.collectedObjects);
+       
     }
 
 }
