@@ -42,7 +42,7 @@ public class Parallax : MonoBehaviour
 
             Debug.Log(parentPosition);
 
-            if (parentPosition - this.transform.position.x >= 65.4)
+            if (parentPosition - this.transform.position.x >= 32.7f)
             {
                 this.transform.position = new Vector3(parentPosition + 32.7f, this.transform.position.y, this.transform.position.z);
             }
